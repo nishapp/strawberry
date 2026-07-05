@@ -2,7 +2,7 @@
 
 A premium, secure agentic service built with the **Google Agent Development Kit (ADK) 2.0** and FastAPI, featuring multi-agent orchestration, Human-in-the-Loop (HIL) safety gates, sentiment-based churn risk assessment, Model Context Protocol (MCP) tool integrations, and robust security pre-screening.
 <div align="center">
-  <img src="docs/images/logo.svg" alt="Strawberry Insurance logo" width="120"/>
+  <img src="docs/logo.svg" alt="Strawberry Insurance logo" width="120"/>
 
   # Strawberry Insurance
 
@@ -20,7 +20,7 @@ A premium, secure agentic service built with the **Google Agent Development Kit 
 
   <br>
 
-  ![Strawberry Insurance cover](docs/images/hero.png)
+  ![Strawberry Insurance cover](docs/hero.png)
 
 </div>
 
@@ -80,7 +80,7 @@ A secure, multi-agent gateway built on **ADK 2.0**:
 
 Messages do not go straight to the model. They flow through a graph workflow with three deterministic stages: **Pre-Screen → Orchestrator → Specialist + Gate**.
 
-![Architecture](docs/images/architecture.png)
+![Architecture](docs/architecture.png)
 
 **The critical design choice** is `rerun_on_resume=True` on the gate nodes. This flag is what lets pauses survive across separate HTTP requests. ADK 2.0 checkpoints state to durable storage and lets the process die between the pause and the resume, which is what makes stateless Cloud Run deployment realistic. A conversation paused at 4pm can be resumed at 4:20pm even if the container recycled.
 
@@ -113,7 +113,7 @@ graph TD
 
 Security in an agentic system cannot rely on the model refusing to do bad things. Models can be jailbroken. Security has to be structural.
 
-![Security pre-screen](docs/images/security-prescreen.png)
+![Security pre-screen](docs/security-prescreen.png)
 
 Three structural defenses:
 
@@ -125,7 +125,7 @@ Three structural defenses:
 
 The renewal flow is our hero scenario because it demonstrates every governance mechanism in one interaction.
 
-![Renewal flow](docs/images/renewal-flow.png)
+![Renewal flow](docs/renewal-flow.png)
 
 **Scenario A · Auto-approve match:** Customer says *"I got a Geico quote for $650"*. Pre-screen finds no PII, no injection. Renewal Agent calls MCP `price_comparison_lookup` → verified. Gap = $50, under the $100 threshold. Python gate auto-approves. Customer sees the adjusted premium instantly.
 
@@ -137,7 +137,7 @@ The renewal flow is our hero scenario because it demonstrates every governance m
 
 Claims uses **two gates** instead of one, because financial exposure is a function of both dollar amount *and* confidence.
 
-![Claims flow](docs/images/claims-flow.png)
+![Claims flow](docs/claims-flow.png)
 
 | Scenario | Amount | Confidence | Outcome |
 |---|---|---|---|
