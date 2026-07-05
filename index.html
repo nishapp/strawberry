@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strawberry Insurance — Premium Car Protection</title>
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #ff4766;
+      --primary-hover: #ff2a4b;
+      --bg: #0f0f12;
+      --surface: rgba(30, 20, 22, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f7;
+      --text-muted: #9e9eaf;
+      --font: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 71, 102, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 71, 102, 0.05) 0%, transparent 40%);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 24px 60px;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      font-size: 2.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .logo-text {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #ffffff, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--primary), #ff859b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 32px;
+      border-radius: 24px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 71, 102, 0.3);
+      box-shadow: 0 10px 30px rgba(255, 71, 102, 0.05);
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Floating Widget Button */
+    .widget-launcher {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 64px;
+      height: 64px;
+      border-radius: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(255, 71, 102, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+    }
+
+    .widget-launcher:hover {
+      transform: scale(1.08);
+      background: var(--primary-hover);
+    }
+
+    .widget-launcher svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    /* Tooltip Bubble */
+    .widget-tooltip {
+      position: fixed;
+      bottom: 44px;
+      right: 110px;
+      background: rgba(30, 20, 22, 0.9);
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #fff;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: pulse-tooltip 2.5s infinite;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    @keyframes pulse-tooltip {
+      0%, 100% { transform: translateX(0); opacity: 0.9; }
+      50% { transform: translateX(-6px); opacity: 1; }
+    }
+
+    /* Chat Pane Container */
+    .chat-pane {
+      position: fixed;
+      bottom: 112px;
+      right: 32px;
+      width: 380px;
+      height: 520px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+    }
+
+    .chat-pane.active {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Chat Header */
+    .chat-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 71, 102, 0.05);
+    }
+
+    .chat-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      background-color: #00e676;
+      border-radius: 4px;
+      box-shadow: 0 0 8px #00e676;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    /* Messages Area */
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      word-wrap: break-word;
+    }
+
+    .message.assistant {
+      background: rgba(255, 255, 255, 0.05);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .message.user {
+      background: var(--primary);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.system {
+      background: rgba(255, 71, 102, 0.1);
+      border: 1px solid rgba(255, 71, 102, 0.2);
+      color: #fff;
+      align-self: center;
+      font-size: 0.85rem;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    /* Input Footer */
+    .chat-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-family: var(--font);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--primary);
+    }
+
+    .send-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .send-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .send-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* HIL Action Box */
+    .hil-actions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      align-self: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 18px;
+      margin-top: 4px;
+    }
+
+    .hil-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .hil-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .hil-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .hil-btn.approve {
+      background: #00e676;
+      color: #000;
+    }
+
+    .hil-btn.approve:hover {
+      background: #00c853;
+    }
+
+    .hil-btn.reject {
+      background: #ff5252;
+      color: #fff;
+    }
+
+    .hil-btn.reject:hover {
+      background: #ff1744;
+    }
+
+    /* Scrollbar */
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Hero Landing -->
+  <main class="hero">
+    <div class="logo-container">
+      <span class="logo-icon">🍓</span>
+      <span class="logo-text">strawberry</span>
+    </div>
+    <h1>Simple. Sweet. <br><span>Fully Protected.</span></h1>
+    <p class="subtitle">Experience AI-driven premium matching, instant auto-claims, and concierge assistance tailored exactly to your drive.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>⚡ Auto-Match Quotes</h3>
+        <p>Submit any verified competitor quote. Within a $100 threshold, we instantly adjust your premium to match it.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🛡️ Rapid Auto-Claims</h3>
+        <p>Simple claims under $1000 are estimated and approved instantly, delivering payout instructions in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <h3>👤 Smart Pre-Screen</h3>
+        <p>Integrated security scans scrub PII and prevent prompt injections, routing sensitive escalations to humans immediately.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Tooltip Message -->
+  <div class="widget-tooltip" id="tooltip">How can I help you?</div>
+
+  <!-- Launcher FAB -->
+  <button class="widget-launcher" id="launcherBtn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+    </svg>
+  </button>
+
+  <!-- Chat Pane -->
+  <div class="chat-pane" id="chatPane">
+    <div class="chat-header">
+      <div class="chat-title">
+        <div class="status-indicator"></div>
+        <span>Strawberry Concierge</span>
+      </div>
+      <button class="close-btn" onclick="toggleChat()">✕</button>
+    </div>
+    
+    <div class="chat-messages" id="messagesContainer">
+      <div class="message assistant">
+        Hi there! I am your Strawberry digital concierge. How can I help you today?
+      </div>
+    </div>
+
+    <!-- HIL Container (conditionally shown) -->
+    <div id="hilActions" style="display: none; padding: 0 20px;">
+      <div class="hil-actions-container">
+        <div class="hil-label" id="hilLabel">Adjuster / Supervisor Review Needed</div>
+        <div class="hil-buttons">
+          <button class="hil-btn approve" onclick="handleHIL(true)">Approve</button>
+          <button class="hil-btn reject" onclick="handleHIL(false)">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask about products, quotes, or claims..." onkeypress="handleKeyPress(event)">
+      <button class="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const sessionId = "session_" + Math.random().toString(36).substring(2, 15);
+    const userId = "web_user";
+    const appName = "strawberry_agent";
+    
+    let activeInterruptId = null;
+    let isSessionCreated = false;
+
+    async function ensureSession() {
+      if (isSessionCreated) return;
+      const response = await fetch(`/apps/${appName}/users/${userId}/sessions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          session_id: sessionId
+        })
+      });
+      if (!response.ok) {
+        throw new Error("Failed to create session: " + response.status);
+      }
+      isSessionCreated = true;
+    }
+
+    function toggleChat() {
+      const pane = document.getElementById("chatPane");
+      const tooltip = document.getElementById("tooltip");
+      pane.classList.toggle("active");
+      tooltip.style.display = "none";
+      if (pane.classList.contains("active")) {
+        document.getElementById("chatInput").focus();
+      }
+    }
+
+    function appendMessage(role, text) {
+      const container = document.getElementById("messagesContainer");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${role}`;
+      msgDiv.textContent = text;
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    }
+
+    async function sendMessage() {
+      const inputEl = document.getElementById("chatInput");
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      appendMessage("user", text);
+      inputEl.value = "";
+
+      // Hide HIL actions if they were visible
+      document.getElementById("hilActions").style.display = "none";
+
+      try {
+        await ensureSession();
+        const response = await fetch("/run", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            app_name: appName,
+            user_id: userId,
+            session_id: sessionId,
+            new_message: {
+              role: "user",
+              parts: [{ text: text }]
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+
+        const events = await response.json();
+        processEvents(events);
+      } catch (err) {
+        console.error("Error communicating with agent backend:", err);
+        appendMessage("system", "Error connecting to agent backend. Make sure the ADK server is running on http://127.0.0.1:8000.");
+      }
+    }
+
+    function processEvents(events) {
+      let assistantText = "";
+      let hitlRequest = null;
+
+      for (const event of events) {
+        // Look for RequestInput interrupts
+        if (event.content && event.content.parts) {
+          for (const part of event.content.parts) {
+            if (part.function_call && part.function_call.name === "adk_request_input") {
+              hitlRequest = part.function_call;
+            } else if (part.text) {
+              try {
+                // Check if it's JSON output
+                const parsed = JSON.parse(part.text);
+                if (parsed && parsed.response) {
+                  assistantText = parsed.response;
+                }
+              } catch {
+                assistantText = part.text;
+              }
+            }
+          }
+        }
+        
+        // If workflow yields a direct final output
+        if (event.output) {
+          if (typeof event.output === "object" && event.output.response) {
+            assistantText = event.output.response;
+          } else if (typeof event.output === "string") {
+            assistantText = event.output;
+          }
+        }
+      }
+
+      if (assistantText) {
+        appendMessage("assistant", assistantText);
+      }
+
+      if (hitlRequest) {
+        activeInterruptId = hitlRequest.id;
+        const msg = hitlRequest.args.message || "Approval required.";
+        appendMessage("system", `Workflow Paused: ${msg}`);
+        document.getElementById("hilLabel").innerText = msg;
+        document.getElementById("hilActions").style.display = "block";
+      }
+    }
+
+    async function handleHIL(approved) {
+      if (!activeInterruptId) return;
+
+      appendMessage("user", approved ? "Approve match/claim" : "Reject match/claim");
+      document.getElementById("hilActions").style.display = "none";
+
+      const interruptId = activeInterruptId;
+      activeInterruptId = null;
+
+      try {
+        await ensureSession();
+        const response = await fetch("/run", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            app_name: appName,
+            user_id: userId,
+            session_id: sessionId,
+            new_message: {
+              role: "user",
+              parts: [{
+                function_response: {
+                  id: interruptId,
+                  name: "adk_request_input",
+                  response: { approved: approved }
+                }
+              }]
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+
+        const events = await response.json();
+        processEvents(events);
+      } catch (err) {
+        console.error("Error sending HIL decision:", err);
+        appendMessage("system", "Failed to submit HIL decision.");
+      }
+    }
+  </script>
+</body>
+</html>
