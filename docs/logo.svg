@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 400 300" width="400" height="300">
+  <path d="M 100 145 Q 100 130 115 130 L 285 130 Q 300 130 300 145 Q 300 195 275 240 Q 245 295 210 335 Q 200 345 190 335 Q 155 295 125 240 Q 100 195 100 145 Z" fill="#FF4D6D"/>
+  <path d="M 130 155 Q 128 148 138 148 L 175 148 Q 168 175 158 200 Q 145 185 130 155 Z" fill="#FF6B85" opacity="0.55"/>
+  <ellipse cx="150" cy="170" rx="4" ry="6" fill="#0A0A0F" transform="rotate(-25 150 170)"/>
+  <ellipse cx="200" cy="165" rx="4" ry="6" fill="#0A0A0F"/>
+  <ellipse cx="250" cy="170" rx="4" ry="6" fill="#0A0A0F" transform="rotate(25 250 170)"/>
+  <ellipse cx="170" cy="205" rx="4" ry="6" fill="#0A0A0F" transform="rotate(-15 170 205)"/>
+  <ellipse cx="225" cy="200" rx="4" ry="6" fill="#0A0A0F" transform="rotate(10 225 200)"/>
+  <ellipse cx="275" cy="210" rx="4" ry="6" fill="#0A0A0F" transform="rotate(30 275 210)"/>
+  <ellipse cx="130" cy="215" rx="4" ry="6" fill="#0A0A0F" transform="rotate(-30 130 215)"/>
+  <ellipse cx="195" cy="240" rx="4" ry="6" fill="#0A0A0F"/>
+  <ellipse cx="245" cy="245" rx="4" ry="6" fill="#0A0A0F" transform="rotate(20 245 245)"/>
+  <ellipse cx="155" cy="250" rx="4" ry="6" fill="#0A0A0F" transform="rotate(-20 155 250)"/>
+  <ellipse cx="215" cy="280" rx="4" ry="6" fill="#0A0A0F" transform="rotate(10 215 280)"/>
+  <ellipse cx="180" cy="290" rx="4" ry="6" fill="#0A0A0F" transform="rotate(-10 180 290)"/>
+  <ellipse cx="200" cy="315" rx="4" ry="6" fill="#0A0A0F"/>
+  <polygon points="145,130 175,90 200,130" fill="#3ECF8E"/>
+  <polygon points="180,130 200,70 220,130" fill="#3ECF8E"/>
+  <polygon points="200,130 225,90 255,130" fill="#3ECF8E"/>
+  <polygon points="180,130 200,70 205,100 200,130" fill="#2A8F63" opacity="0.5"/>
+  <polygon points="145,130 175,90 175,110 165,130" fill="#2A8F63" opacity="0.4"/>
+  <polygon points="235,130 255,130 240,110 225,90" fill="#2A8F63" opacity="0.4"/>
+</svg>
